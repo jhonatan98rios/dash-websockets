@@ -1,0 +1,20 @@
+# Use a imagem oficial do Python como base
+FROM python:3.9-slim
+
+# Defina o diretório de trabalho no container
+WORKDIR /server
+
+# Copie o arquivo requirements.txt para dentro do container
+COPY requirements.server.txt /server/
+
+# Instale as dependências necessárias
+RUN pip install --no-cache-dir -r requirements.server.txt
+
+# Copie todo o código da aplicação para o diretório de trabalho
+COPY . /server/
+
+# Exponha a porta em que o Flask estará ouvindo
+EXPOSE 3000
+
+# Comando para rodar a aplicação Uvicorn
+CMD ["python", "-m", "server"]
