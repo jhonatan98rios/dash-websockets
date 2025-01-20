@@ -33,7 +33,7 @@ minikube -p minikube docker-env --shell powershell | Invoke-Expression
 
 # Client
 
-## Create a image
+## Create or Update a image
 ```bash
     docker build -t websockets-dash-client -f Dockerfile.client .
 ```
