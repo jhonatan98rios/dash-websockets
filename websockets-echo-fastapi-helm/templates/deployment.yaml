@@ -1,0 +1,50 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-server
+  labels:
+    app: {{ .Chart.Name }}
+    component: server
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}
+      component: server
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}
+        component: server
+    spec:
+      containers:
+        - name: server
+          image: "{{ .Values.server.image.repository }}:{{ .Values.server.image.tag }}"
+          ports:
+            - containerPort: {{ .Values.server.containerPort }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-client
+  labels:
+    app: {{ .Chart.Name }}
+    component: client
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}
+      component: client
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}
+        component: client
+    spec:
+      containers:
+        - name: client
+          image: "{{ .Values.client.image.repository }}:{{ .Values.client.image.tag }}"
+          ports:
+            - containerPort: {{ .Values.client.containerPort }}

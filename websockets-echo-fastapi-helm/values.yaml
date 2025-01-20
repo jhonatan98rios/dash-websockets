@@ -1,0 +1,36 @@
+replicaCount: 1
+
+server:
+  image:
+    repository: 127.0.0.1:5000/websockets-echo-fastapi-server
+    tag: latest
+  service:
+    type: NodePort
+    port: 3000
+    targetPort: 3000
+    nodePort: 32000
+  containerPort: 3000
+
+client:
+  image:
+    repository: 127.0.0.1:5000/websockets-dash-client
+    tag: latest
+  service:
+    type: LoadBalancer
+    port: 8050
+    targetPort: 8050
+  containerPort: 3000
+
+ingress:
+  enabled: true
+  hosts:
+    - host: server.local
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            server:
+              service:
+                name: websockets-chat-helm-server
+                port:
+                  number: 3000

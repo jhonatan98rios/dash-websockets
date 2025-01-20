@@ -35,22 +35,22 @@ minikube -p minikube docker-env --shell powershell | Invoke-Expression
 
 ## Create a image
 ```bash
-    docker build -t websockets-echo-fastapi-client -f Dockerfile.client .
+    docker build -t websockets-dash-client -f Dockerfile.client .
 ```
 
 ## Run the container (optional)
 ```bash
-    docker run -it --rm -d -p 8050:8050 --name websockets-echo-fastapi-client websockets-echo-fastapi-client
+    docker run -it --rm -d -p 8050:8050 --name websockets-dash-client websockets-dash-client
 ```
 
 ## Tag image too use on minukube registry
 ```bash
-    docker tag websockets-echo-fastapi-client 127.0.0.1:5000/websockets-echo-fastapi-client
+    docker tag websockets-dash-client 127.0.0.1:5000/websockets-dash-client
 ```
 
 ## Push to minukube registry
 ```bash
-    docker push 127.0.0.1:5000/websockets-echo-fastapi-client
+    docker push 127.0.0.1:5000/websockets-dash-client
 ```
 
 ---
@@ -59,10 +59,22 @@ minikube -p minikube docker-env --shell powershell | Invoke-Expression
 
 ## Install Chart on Kubernetes
 ```bash
-    helm install websockets-chat-helm ./websockets-chat-helm
+    helm install websockets-echo-fastapi-helm ./websockets-echo-fastapi-helm
 ```
 
 ## Port Forward
 ```bash
-    minikube service websockets-chat-helm-backend
+    minikube service websockets-echo-fastapi-helm-client
+    minikube service websockets-echo-fastapi-helm-server
 ```
+
+# Updating the chart
+```bash
+    helm upgrade websockets-echo-fastapi-helm ./websockets-echo-fastapi-helm
+```
+
+## Uninstall Chart
+```bash
+    helm delete websockets-echo-fastapi-helm
+```
+

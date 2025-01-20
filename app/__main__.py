@@ -7,7 +7,7 @@ app = DashProxy(prevent_initial_callbacks=True)
 
 
 app.layout = html.Div([
-    WebSocket(url="ws://127.0.0.1:3000/ws", id="ws"),
+    WebSocket(url="ws://127.0.0.1:56242/ws", id="ws"),
     dcc.Store(id="message-store", data=[]),
     dcc.Input(id="input", autoComplete="off", type="text", placeholder="Type a message"), 
     html.Button("Click", id="send-btn"),

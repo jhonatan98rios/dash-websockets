@@ -1,0 +1,34 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-server
+  labels:
+    app: {{ .Chart.Name }}
+    component: server
+spec:
+  type: {{ .Values.server.service.type }}
+  ports:
+    - port: {{ .Values.server.service.port }}
+      targetPort: {{ .Values.server.service.targetPort }}
+      nodePort: {{ .Values.server.service.nodePort }}
+  selector:
+    app: {{ .Chart.Name }}
+    component: server
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-client
+  labels:
+    app: {{ .Chart.Name }}
+    component: client
+spec:
+  type: {{ .Values.client.service.type }}
+  ports:
+    - port: {{ .Values.client.service.port }}
+      targetPort: {{ .Values.client.service.targetPort }}
+  selector:
+    app: {{ .Chart.Name }}
+    component: client
