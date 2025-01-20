@@ -1,16 +1,17 @@
+import os
+import uuid
 from app.lib.components.button import button
 from app.lib.components.textarea import textarea
 from dash_extensions.enrich import DashProxy, html, dcc, Input, Output, callback_context
 from dash_extensions import WebSocket
 from dash import html, Input, Output, State
-import uuid
 
 # Create example app.
 app = DashProxy(prevent_initial_callbacks=True)
-
+ws_port = os.getenv("WEBSOCKET_PORT", "8050")
 
 app.layout = html.Div([
-    WebSocket(url="ws://127.0.0.1:60179/ws", id="ws"),
+    WebSocket(url=f"ws://127.0.0.1:{ws_port}/ws", id="ws"),
     dcc.Store(id="message-store", data=[]),
     textarea('input'),
     button('Click', 'send-btn'),

@@ -34,3 +34,7 @@ ingress:
                 name: websockets-chat-helm-server
                 port:
                   number: 3000
+
+env:
+  - name: WEBSOCKET_PORT
+    value: "60179"

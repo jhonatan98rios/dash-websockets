@@ -48,3 +48,8 @@ spec:
           image: "{{ .Values.client.image.repository }}:{{ .Values.client.image.tag }}"
           ports:
             - containerPort: {{ .Values.client.containerPort }}
+          env:
+            {{- range .Values.env }}
+            - name: {{ .name }}
+              value: {{ .value | quote }}
+            {{- end }}
